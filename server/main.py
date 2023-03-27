@@ -17,10 +17,6 @@ database_connection = mysql.connector.connect(
 
 print(database_connection)
 
-mycursor = database_connection.cursor()
-
-mycursor.execute("CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
-
 
 @app.get("/")
 async def root():
