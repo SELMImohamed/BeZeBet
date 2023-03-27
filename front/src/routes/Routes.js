@@ -28,6 +28,7 @@ export default function Root() {
       </div>
 <Box align="center">
 <h1 className="titre">BE ZEBET</h1>
+<h3>Paris entre amis ?</h3>
       <Button
         sx={{
           borderRadius: 2,

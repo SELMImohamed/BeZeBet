@@ -36,10 +36,15 @@ ul {
     font-family: 'Dosis', sans-serif;
     font-family: 'Montserrat', sans-serif;
     font-size: 8em;
-    margin-top: 15%;
+    margin-top: 12%;
+    margin-bottom: 1%;
   }
 
   .MuiButton-outlined{
     display: block;
     margin : auto;
+  }
+
+  h3{
+    color: white;
   }
