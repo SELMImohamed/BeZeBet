@@ -38,17 +38,18 @@ async def root():
 
 @app.post("/register")
 async def register(user: User):
-    database_connection.cursor().execute("INSERT INTO user (name, email, password, date, coins, nbParis, nbParisWin) VALUES (%s, %s, %s, %s, %s, %s, %s)", (user.name, user.email, user.password, user.date, user.coins, user.nbParis, user.nbParisWin))
+    cursor = database_connection.cursor()
+    cursor.execute("INSERT INTO user (name, email, password, date, coins, nbParis, nbParisWin) VALUES (%s, %s, %s, %s, %s, %s, %s)", (user.name, user.email, user.password, user.date, user.coins, user.nbParis, user.nbParisWin))
     database_connection.commit()
-    database_connection.close()
+    cursor.close()
     return {"message": "registered"}
 
 @app.post("/login")
-async def login(userlog: UserLog):
-    database_connection.cursor().execute("SELECT * FROM user WHERE email = ? AND password = ?", (userlog.email, userlog.password))
-    result = database_connection.cursor().fetchone()
-    database_connection.commit()
-    database_connection.close()
+async def login(user: UserLog):
+    cursor = database_connection.cursor()
+    cursor.execute("SELECT * FROM user WHERE email = %s AND password = %s", (user.email, user.password))
+    result = cursor.fetchone()
+    cursor.close()
     if result is None:
         raise  HTTPException(status_code=400, detail="invalid email or password")
     return {"message": "logged in"}
