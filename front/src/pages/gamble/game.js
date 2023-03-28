@@ -1,12 +1,23 @@
-import react,{useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 
-
+import NavBar from "../../component/NavBar";
 const Game = () => {
+    
+    useEffect(() => {
+        console.log("Game mounted");
+        return () => {
+            console.log("Game unmounted");
+        };
+    }, []);
+
+  return (
     <>
-    <div className="game">
+        <NavBar />
+      <div className="game">
         <h1>Game</h1>
-    </div>
+      </div>
     </>
-}
+  );
+};
 
 export default Game;
