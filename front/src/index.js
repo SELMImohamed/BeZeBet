@@ -9,6 +9,7 @@ import {
 import Root from "./routes/Routes";
 import Register from "./pages/register/register"
 import Login from "./pages/login/login"
+import Account from "./pages/account/userInfo"
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
+  },
+  {
+    path: "/account",
+    element: <Account />
   }
 ]);
 
