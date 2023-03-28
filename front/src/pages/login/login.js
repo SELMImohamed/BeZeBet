@@ -19,10 +19,10 @@ export default function Root() {
       noValidate
       autoComplete="off"
     >
-      <div className="texfield">
+      <box className="texfield">
       <TextField label="Email" color="error" focused />
       <TextField label="Password" color="error" focused type="password" />
-      </div>
+      </box>
       
     </Box>
     </>

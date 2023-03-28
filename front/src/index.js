@@ -11,7 +11,9 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import Home from "./routes/Home";
 import Register from "./pages/register/register";
+import Login from './pages/login/login';
 import Game from "./pages/gamble/game";
+
 
 const router = createBrowserRouter(
   [{
@@ -22,6 +24,10 @@ const router = createBrowserRouter(
   {
     path:"/register",
     element: <Register />,
+  },
+  {
+    path:"/login",
+    element: <Login />,
   },
   {
     path:"/game",
