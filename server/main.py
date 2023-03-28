@@ -31,6 +31,16 @@ class User(BaseModel):
 class UserLog(BaseModel):
     email: str
     password: str
+
+class Bet(BaseModel):
+    idUser: int
+    gain : int
+    date : date
+    sumPour : int
+    sumContre : int
+    resultat : bool
+
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -53,3 +63,13 @@ async def login(user: UserLog):
     if result is None:
         raise  HTTPException(status_code=400, detail="invalid email or password")
     return {"message": "logged in"}
+
+@app.post('/createBet')
+async def createBet(bet: Bet):
+    cursor = database_connection.cursor()
+    cursor.execute("INSERT INTO bet (idUser, date, sumPour, sumContre, resultat,gain) VALUES (%s, %s, %s, %s, %s,%s)", (bet.idUser, bet.date, bet.sumPour, bet.sumContre, bet.resultat,bet.gain))
+    database_connection.commit()
+    cursor.close()
+    return {"message": "bet created"}
+
+

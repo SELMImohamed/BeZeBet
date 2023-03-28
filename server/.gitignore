@@ -19,6 +19,11 @@ docs_build
 venv
 docs.zip
 archive.zip
+../.idea
+__pycache__
+../.idea/workspace.xml
+__pycache__/main.cpython-310.pyc
+
 # vim temporary files
 ~
 ..sw?
