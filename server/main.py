@@ -44,6 +44,10 @@ class Bet(BaseModel):
     resultat : bool
 
 
+class UserId(User):
+    name: str
+
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -78,7 +82,7 @@ async def createBet(bet: Bet):
     return {"message": "bet created"}
 
 
-@app.post("/playerWithMostCoins")
+@app.get("/playerWithMostCoins")
 async def playerWithMostCoins():
     cursor = database_connection.cursor()
     cursor.execute("SELECT * FROM user ORDER BY coins DESC")
@@ -88,3 +92,15 @@ async def playerWithMostCoins():
         return {"message": result}
 
     return {"error messsage": "ERROR"}
+
+
+@app.post("/playerInTheBet")
+async def playerInTheBet(user: UserId):
+    cursor = database_connection.cursor()
+    cursor.execute("SELECT * FROM user WHERE id = %s", user.name)
+    result = cursor.fetchall()
+    cursor.close()
+    if result:
+        return {"message": result}
+
+    return{"error message": "ERROR"}
