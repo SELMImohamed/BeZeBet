@@ -3,6 +3,9 @@ import mysql.connector
 from dotenv import load_dotenv
 from pydantic import BaseModel
 from datetime import date, datetime, time, timedelta
+import qrcode
+from fastapi.responses import Response
+from io import BytesIO
 import os
 
 load_dotenv()
@@ -73,3 +76,18 @@ async def createBet(bet: Bet):
     return {"message": "bet created"}
 
 
+@app.get("/qrcode/{link}")
+def generate_qrcode(link: str):
+    # Generate QR code
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(link)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    # Convert image to bytes
+    buffer = BytesIO()
+    img.save(buffer)
+    img_bytes = buffer.getvalue()
+
+    # Return image as response
+    return Response(content=img_bytes, media_type="image/png")
