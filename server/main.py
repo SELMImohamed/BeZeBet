@@ -1,8 +1,10 @@
+from typing import Optional
+
 from fastapi import FastAPI, HTTPException
 import mysql.connector
 from dotenv import load_dotenv
 from pydantic import BaseModel
-from datetime import date, datetime, time, timedelta
+from datetime import date
 import os
 
 load_dotenv()
@@ -21,13 +23,14 @@ print(database_connection)
 
 
 class User(BaseModel):
+    id: Optional[int]
     name: str
     email: str
     password: str
-    date : date
-    coins : int
-    nbParis : int
-    nbParisWin : int
+    date: Optional[date]
+    coins: Optional[int]
+    nbParis: Optional[int]
+    nbParisWin: Optional[int]
 
 
 class UserLog(BaseModel):
@@ -36,16 +39,19 @@ class UserLog(BaseModel):
 
 
 class Bet(BaseModel):
-    idUser: int
-    gain : int
-    date : date
-    sumPour : int
-    sumContre : int
-    resultat : bool
+    idUser: Optional[int]
+    gain: int
+    date: Optional[date]
+    sumPour: Optional[int]
+    sumContre: Optional[int]
+    resultat: Optional[bool]
 
 
-class UserId(User):
-    name: str
+class BetPlayer(BaseModel):
+    id: Optional[int]           # Bet ID
+    idBet: Optional[int]        # ID creator Bet
+    idUser: Optional[int]       # ID for every person who vote
+    respons: Optional[bool]     # Bet result
 
 
 @app.get("/")
@@ -94,13 +100,14 @@ async def playerWithMostCoins():
     return {"error messsage": "ERROR"}
 
 
-@app.post("/playerInTheBet")
-async def playerInTheBet(user: UserId):
+@app.post("/selectPlayerInTheBet/")
+async def selectPlayerInTheBet(id: int):
     cursor = database_connection.cursor()
-    cursor.execute("SELECT * FROM user WHERE id = %s", user.name)
-    result = cursor.fetchall()
+    cursor.execute("SELECT * FROM user WHERE id = %s", (id,))
+    result = cursor.fetchone()
     cursor.close()
     if result:
         return {"message": result}
+    else:
+        return {"message": "User not found"}, 404
 
-    return{"error message": "ERROR"}
