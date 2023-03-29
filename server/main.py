@@ -19,6 +19,7 @@ database_connection = mysql.connector.connect(
 
 print(database_connection)
 
+
 class User(BaseModel):
     name: str
     email: str
@@ -28,9 +29,11 @@ class User(BaseModel):
     nbParis : int
     nbParisWin : int
 
+
 class UserLog(BaseModel):
     email: str
     password: str
+
 
 class Bet(BaseModel):
     idUser: int
@@ -54,6 +57,7 @@ async def register(user: User):
     cursor.close()
     return {"message": "registered"}
 
+
 @app.post("/login")
 async def login(user: UserLog):
     cursor = database_connection.cursor()
@@ -61,8 +65,9 @@ async def login(user: UserLog):
     result = cursor.fetchone()
     cursor.close()
     if result is None:
-        raise  HTTPException(status_code=400, detail="invalid email or password")
+        raise HTTPException(status_code=400, detail="invalid email or password")
     return {"message": "logged in"}
+
 
 @app.post('/createBet')
 async def createBet(bet: Bet):
@@ -73,3 +78,14 @@ async def createBet(bet: Bet):
     return {"message": "bet created"}
 
 
+@app.post("/playerWithMostCoins")
+async def plaerWithMostCoins():
+    cursor = database_connection.cursor()
+    cursor.execute("SELECT * FROM user ORDER BY coins DESC")
+    rslt = cursor.fetchall()
+    cursor.close()
+
+    if rslt:
+        return {"message": rslt}
+
+    return {"messsage": "KJFZKBEHFKZE"}
