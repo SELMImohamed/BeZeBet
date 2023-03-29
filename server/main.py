@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 import mysql.connector
 from dotenv import load_dotenv
 from pydantic import BaseModel
-from datetime import date, datetime, time, timedelta
+from datetime import date
 import os
 
 load_dotenv()
@@ -23,7 +23,7 @@ class User(BaseModel):
     name: str
     email: str
     password: str
-    date : date
+    date : date 
     coins : int
     nbParis : int
     nbParisWin : int
@@ -46,7 +46,7 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.post("/register")
+@app.post("/api/register")
 async def register(user: User):
     cursor = database_connection.cursor()
     cursor.execute("INSERT INTO user (name, email, password, date, coins, nbParis, nbParisWin) VALUES (%s, %s, %s, %s, %s, %s, %s)", (user.name, user.email, user.password, user.date, user.coins, user.nbParis, user.nbParisWin))
@@ -54,7 +54,7 @@ async def register(user: User):
     cursor.close()
     return {"message": "registered"}
 
-@app.post("/login")
+@app.post("/api/login")
 async def login(user: UserLog):
     cursor = database_connection.cursor()
     cursor.execute("SELECT * FROM user WHERE email = %s AND password = %s", (user.email, user.password))
@@ -64,7 +64,7 @@ async def login(user: UserLog):
         raise  HTTPException(status_code=400, detail="invalid email or password")
     return {"message": "logged in"}
 
-@app.post('/createBet')
+@app.post('/api/gambleGame/createBet')
 async def createBet(bet: Bet):
     cursor = database_connection.cursor()
     cursor.execute("INSERT INTO bet (idUser, date, sumPour, sumContre, resultat,gain) VALUES (%s, %s, %s, %s, %s,%s)", (bet.idUser, bet.date, bet.sumPour, bet.sumContre, bet.resultat,bet.gain))

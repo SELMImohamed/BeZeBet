@@ -10,6 +10,8 @@ import { register } from "../../services/register";
 import "../../styles/Register.css";
 import NavBar from "../../component/NavBar";
 
+import {register} from '../../services/register';
+
 export default function Root() {
   const [form, setForm] = useState({
     pseudo: "",

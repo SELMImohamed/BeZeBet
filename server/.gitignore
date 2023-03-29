@@ -14,6 +14,7 @@ test.db
 log.txt
 Pipfile.lock
 env3.*
+env
 .env
 docs_build
 venv
@@ -23,7 +24,7 @@ archive.zip
 __pycache__
 ../.idea/workspace.xml
 __pycache__/main.cpython-310.pyc
-
+__pycache__
 # vim temporary files
 ~
 ..sw?
