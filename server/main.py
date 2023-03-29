@@ -79,13 +79,12 @@ async def createBet(bet: Bet):
 
 
 @app.post("/playerWithMostCoins")
-async def plaerWithMostCoins():
+async def playerWithMostCoins():
     cursor = database_connection.cursor()
     cursor.execute("SELECT * FROM user ORDER BY coins DESC")
-    rslt = cursor.fetchall()
+    result = cursor.fetchall()
     cursor.close()
+    if result:
+        return {"message": result}
 
-    if rslt:
-        return {"message": rslt}
-
-    return {"messsage": "KJFZKBEHFKZE"}
+    return {"error messsage": "ERROR"}
