@@ -1,6 +1,6 @@
 import React , {useEffect} from 'react';
 import { Link } from "react-router-dom";
-import "../styles/Route.css";
+import "../styles/NavBar.css";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
