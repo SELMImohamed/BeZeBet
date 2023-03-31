@@ -1,53 +1,73 @@
 /* eslint-disable jsx-a11y/alt-text */
 import "../../styles/Register.css";
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
+import { register } from "../../services/register";
+import "../../styles/Register.css";
+import NavBar from "../../component/NavBar";
 import Box from '@mui/material/Box';
+import Logo from "../../ressources/img/BeZebet.png"
 import TextField from '@mui/material/TextField';
 
-import {register} from '../../services/register';
-
-export default function Root() {
+export default function Register() {
   const [form, setForm] = useState({
     pseudo: "",
     email: "",
     password: "",
+    confirm_password:""
   });
 
-
-  const onHandleButton = () =>{
-    register(form);
-  }
+  const onHandleButton = () => {
+    if (form.password === form.confirm_password){
+      register(form);
+    }else{
+      alert("Les mots de passe ne correspondent pas");
+    }
+  };
 
   return (
     <>
- <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-        display : 'flex',
-        justifyContent: 'center',
-        alignItems : 'center',
-        marginTop : '13%',
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div className="texfield">
-      <TextField label="Pseudonyme" color="error" focused
-        onChange={(e) => setForm({ ...form, pseudo: e.target.value })} 
-      />
-      <TextField label="Email" color="error" focused 
-        onChange={(e) => setForm({ ...form, email: e.target.value })}
-      />
-      <TextField label="Password" color="error" focused type="password"
-        onChange={(e) => setForm({ ...form, password: e.target.value })} 
-      />
-      </div>
-      
-    </Box>
+      <NavBar />
+      <form onSubmit={onHandleButton} className="form">
+          <br />
+        <Box
+            sx={{
+              width: 400,
+              height: 640,
+                marginTop: "5%",
+                backgroundColor: '#2C2C2B',
+                borderRadius: "20px",
+            }}
+        >
+            <img src={Logo} alt="logo" className="logo" />
+            <h3 className="title">Inscrivez-vous</h3>
+
+            <div className="text">
+                <TextField
+                    id="outlined-error"
+                    className="textfield"
+                    label="E-mail"
+                />
+                <br/>
+                <TextField
+                    id="outlined-error"
+                    className="textfield"
+                    label="Username"
+                />
+                <br/>
+                <TextField
+                    id="outlined-error"
+                    className="textfield"
+                    label="Password"
+                />
+                <br/>
+                <TextField
+                    id="outlined-error"
+                    className="textfield"
+                    label="Confirm Password"
+                />
+            </div>
+        </Box>
+      </form>
     </>
   );
 }
-
-
-
