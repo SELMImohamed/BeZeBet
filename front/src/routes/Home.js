@@ -1,9 +1,9 @@
 import React , {useEffect} from 'react';
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "../styles/Route.css";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-
+import { useSelector } from "react-redux";
 import NavBar from '../component/NavBar';
 
 export default function Home() {
@@ -14,6 +14,22 @@ export default function Home() {
       console.log("Root unmounted");
     };
   }, []);
+
+  let navigate = useNavigate();
+
+  const auth = useSelector((state) => state.auth);
+
+  const getStarted = () => {
+      console.log(auth)
+      if(auth === null || auth === '' || auth === {}){
+          let path = "/game"
+          navigate(path)
+      }else{
+          let path = "/register"
+          navigate(path)
+      }
+  }
+
 
   return (
     <>
@@ -35,6 +51,7 @@ export default function Home() {
           }}
           color="error"
           variant="outlined"
+          onClick={getStarted}
         >
           Get Start
         </Button>

@@ -1,3 +1,5 @@
+from typing import Optional
+
 from fastapi import FastAPI, HTTPException
 import mysql.connector
 from dotenv import load_dotenv
@@ -19,26 +21,37 @@ database_connection = mysql.connector.connect(
 
 print(database_connection)
 
+
 class User(BaseModel):
+    id: Optional[int]
     name: str
     email: str
     password: str
-    date : date 
-    coins : int
-    nbParis : int
-    nbParisWin : int
+    date: Optional[date]
+    coins: Optional[int]
+    nbParis: Optional[int]
+    nbParisWin: Optional[int]
+
 
 class UserLog(BaseModel):
     email: str
     password: str
 
+
 class Bet(BaseModel):
-    idUser: int
-    gain : int
-    date : date
-    sumPour : int
-    sumContre : int
-    resultat : bool
+    idUser: Optional[int]
+    gain: int
+    date: Optional[date]
+    sumPour: Optional[int]
+    sumContre: Optional[int]
+    resultat: Optional[bool]
+
+
+class BetPlayer(BaseModel):
+    id: Optional[int]           # Bet ID
+    idBet: Optional[int]        # ID creator Bet
+    idUser: Optional[int]       # ID for every person who vote
+    respons: Optional[bool]     # Bet result
 
 
 @app.get("/")
@@ -54,17 +67,19 @@ async def register(user: User):
     cursor.close()
     return {"message": "registered"}
 
-@app.post("/api/login")
+
+@app.post("/login")
 async def login(user: UserLog):
     cursor = database_connection.cursor()
     cursor.execute("SELECT * FROM user WHERE email = %s AND password = %s", (user.email, user.password))
     result = cursor.fetchone()
     cursor.close()
     if result is None:
-        raise  HTTPException(status_code=400, detail="invalid email or password")
+        raise HTTPException(status_code=400, detail="invalid email or password")
     return {"message": "logged in"}
 
-@app.post('/api/gambleGame/createBet')
+
+@app.post('/createBet')
 async def createBet(bet: Bet):
     cursor = database_connection.cursor()
     cursor.execute("INSERT INTO bet (idUser, date, sumPour, sumContre, resultat,gain) VALUES (%s, %s, %s, %s, %s,%s)", (bet.idUser, bet.date, bet.sumPour, bet.sumContre, bet.resultat,bet.gain))
@@ -72,4 +87,27 @@ async def createBet(bet: Bet):
     cursor.close()
     return {"message": "bet created"}
 
+
+@app.get("/playerWithMostCoins")
+async def playerWithMostCoins():
+    cursor = database_connection.cursor()
+    cursor.execute("SELECT * FROM user ORDER BY coins DESC")
+    result = cursor.fetchall()
+    cursor.close()
+    if result:
+        return {"message": result}
+
+    return {"error messsage": "ERROR"}
+
+
+@app.post("/selectPlayerInTheBet/")
+async def selectPlayerInTheBet(id: int):
+    cursor = database_connection.cursor()
+    cursor.execute("SELECT * FROM user WHERE id = %s", (id,))
+    result = cursor.fetchone()
+    cursor.close()
+    if result:
+        return {"message": result}
+    else:
+        return {"message": "User not found"}, 404
 
