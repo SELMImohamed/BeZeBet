@@ -25,6 +25,10 @@ class RegisterParams (BaseModel):
 class RegisterSchema (BaseModel):
     user: User
 
+    
+class LoginSchema (BaseModel):
+    user: User
+
 class UserLog(BaseModel):
     email: str
     password: str
