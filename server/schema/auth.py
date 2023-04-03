@@ -5,13 +5,15 @@ from datetime import datetime
 from .bet import Bet
 
 class User(BaseModel):
-    id: int
+    id: Optional[int]
     email: str
     name: str
     hashed_password: str
     coins : float
-    created_at: datetime
+    created_at: Optional[datetime]
     
+    class Config:
+        orm_mode = True
 
 
 class RegisterParams (BaseModel):
