@@ -1,0 +1,35 @@
+.text-ro{
+    color: #fff;
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin: 1em;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container{
+    display: flex;
+    background-color: #2C2C2B;
+}
+
+.logo_home {
+    width: 40%;
+    height: 40%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -10%;
+}
+
+span {
+    color: #FBCF0A;
+}
+
+.title_home{
+    font-size: 4em;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    margin: 1em;
+    margin-left: 40%;
+    cursor: pointer;
+}
