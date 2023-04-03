@@ -1,33 +1,30 @@
-from ..schema.auth import User
-from ..config.database import database_connection
-from ..config.hashing import Hash
+from uuid import uuid4
+import datetime
+from sqlalchemy.orm import Session
 
-def create_user(email:str, password: str, name:str):
-    user = (get_user_by_email(email))
+from models.user import User
+from config.hashing import Hash
+
+
+
+def create_user(db: Session, email:str, password: str, name:str):
+    print(email)
+    user = (get_user_by_email(db, email))
     
-    if user == None:
+    if user is None:
         new_user = User(
             email= email,
-            hashed_password = Hash.bcryt(password),
-            name=name,
-            coins = 0,
-            nbParis = [],
-            nbParisWin= 0,
+            name = name,
+            hashed_password = Hash.bcrypt(password),
+            coins = 100,
         )
-        cursor = database_connection.cursor()
-        cursor.execute("INSERT INTO user (name, email, password, date, coins, nbParis, nbParisWin) VALUES (%s, %s, %s, %s, %s, %s, %s)", (new_user.name, new_user.email, new_user.hashed_password, new_user.date, new_user.coins, new_user.nbParis, new_user.nbParisWin))
-        database_connection.commit()
-        cursor.close()
+        db.add(new_user)
+        db.commit()
+        db.refresh(new_user)
         return new_user
     else:
         return None
 
 
-def get_user_by_email(email:str):
-    cursor = database_connection.cursor()
-    cursor.execute("SELECT * FROM user WHERE email = %s", (email,))
-    result = cursor.fetchone()
-    cursor.close()
-    if result is None:
-        return None
-    return User(**result)
+def get_user_by_email(db:Session, email:str):
+    return db.query(User).filter(User.email == email).first()

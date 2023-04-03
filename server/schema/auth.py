@@ -6,25 +6,22 @@ from .bet import Bet
 
 class User(BaseModel):
     id: int
-    name: str
     email: str
-    coins : int
-    nbParis : Optional[List[Bet]]
-    nbParisWin : int
-    createdAt: datetime
+    name: str
+    hashed_password: str
+    coins : float
+    created_at: datetime
     
-    class Config():
-        orm_mode = True
+
 
 class RegisterParams (BaseModel):
-    username: str
+    name: str
     email: EmailStr
     password: str
     password_cfg: str
 
 class RegisterSchema (BaseModel):
-    username: str
-    email: EmailStr
+    user: User
 
 class UserLog(BaseModel):
     email: str
