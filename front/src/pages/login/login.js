@@ -6,28 +6,30 @@ import TextField from '@mui/material/TextField';
 import Logo from "../../ressources/img/BeZebet.png";
 import NavBar from "../../component/NavBar";
 import {useState} from "react";
-import {register} from "../../services/register";
+import Button from '@mui/material/Button';
+import axios from "axios";
 
 export default function Login() {
     const [form, setForm] = useState({
-        pseudo: "",
+        name: "",
         email: "",
         password: "",
-        confirm_password:""
     });
 
-    const onHandleButton = () => {
-        if (form.password === form.confirm_password){
-            register(form);
-        }else{
-            alert("Les mots de passe ne correspondent pas");
-        }
-    };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log("enter in handleSubmit");
+
+        axios.post("http://localhost:8000/login", form)
+            .then(response => console.log(response.data))
+            .catch(error => console.log(error));
+        console.log("end handleSubmit");
+    }
 
   return (
     <>
         <NavBar />
-        <form onSubmit={onHandleButton} className="form">
+        <form className="form">
             <Box
                 sx={{
                     width: 400,
@@ -53,6 +55,21 @@ export default function Login() {
                         label="Username"
                     />
                 </div>
+                <br/>
+                <Button
+                    sx={{
+                        borderRadius: 2,
+                        p: 1,
+                        minWidth: 100,
+                        color: "#FBCF0A",
+                        marginLeft: "35%",
+                    }}
+                    color="inherit"
+                    variant="outlined"
+                    onClick={handleSubmit}
+                    >
+                    Login In !
+                    </Button>
             </Box>
         </form>
     </>

@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
 import NavBar from '../component/NavBar';
-
+ 
 export default function Home() {
 
   useEffect(() => {
@@ -40,8 +40,8 @@ export default function Home() {
       </style>
 
       <Box align="center">
-        <h1 className="titre"><span>BE</span> ZEBET</h1>
-        <h3>Créer ton Paris entre amis ?</h3>
+          <h1 className="titre">BE ZE<span>BET</span></h1>
+        <h3>Créer ton Pari entre amis ?</h3>
         <Button
           sx={{
             borderRadius: 2,
