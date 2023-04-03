@@ -8,7 +8,6 @@ from config.hashing import Hash
 
 
 def create_user(db: Session, email:str, password: str, name:str):
-    print(email)
     user = (get_user_by_email(db, email))
     
     if user is None:
