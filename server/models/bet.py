@@ -12,7 +12,7 @@ class Bet(Base):
     # __table_args__ = {'extend_existing': True}
     
     id = Column(Integer, primary_key= True, index=True)
-    user_id= Column(Integer, ForeignKey('users.id'))
+    user_id = Column(Integer, ForeignKey('users.id'))
     odds_for = Column(Integer, default=None)
     odds_against = Column(Integer, default=None)
     result = Column(Boolean, default=None)
