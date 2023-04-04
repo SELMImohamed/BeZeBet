@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from "../../services/login";
 
 export default function Login() {
-    const user = useSelector((state) => state.auth);
+    const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
@@ -27,11 +27,13 @@ export default function Login() {
     });
 
   useEffect(() => {
-    if (user !== '' || !user || user !== null){
+    console.log(auth.user)
+    if (auth.user !== null){
+      console.log('ok')
       let path = "/";
       navigate(path);
     }
-  },[navigate, user])
+  },[navigate, auth])
 
 
 
