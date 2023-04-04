@@ -19,11 +19,11 @@ const Game = () => {
     <>
       <NavBar />
       <div className="game">
-      {Array.isArray(allBet) && allBet.length > 0 ? (
+      {/* {Array.isArray(allBet) && allBet.length > 0 ? (
         allBet.map((bet) => <Bet key={bet._id} bet={bet} />)
       ) : (
         <p>No bets found.</p>
-      )}
+      )} */}
       </div>
     </>
   );
