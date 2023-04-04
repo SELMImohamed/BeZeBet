@@ -16,7 +16,7 @@ import { register } from "../../services/register";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     name: "",
@@ -47,13 +47,9 @@ export default function Register() {
     }
     const user = register(form);
     if(user){
-      HomePage();
+      let path = "/";
+      navigate(path);
     };
-  };
-
-  const HomePage = () => {
-    let path = "/home";
-    navigate(path);
   };
 
   return (

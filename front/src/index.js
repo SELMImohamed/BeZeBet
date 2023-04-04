@@ -20,7 +20,7 @@ import { HomePage } from "./pages/home/home";
 const router = createBrowserRouter(
   [{
     path:"/",
-    element: <Home />,
+    element: <HomePage />,
 
   },
   {
@@ -39,10 +39,10 @@ const router = createBrowserRouter(
     path:"/bet",
     element: <CreateBet />,
   },
-  {
-    path:"/home",
-    element: <HomePage />,
-  }
+  // {
+  //   path:"/home",
+  //   element: <HomePage />,
+  // }
 ]
 );
 
