@@ -9,7 +9,6 @@ import { Provider } from "react-redux";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
-import Home from "./routes/Home";
 import Register from "./pages/register/register";
 import Login from './pages/login/login';
 import Game from "./pages/gamble/game";

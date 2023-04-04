@@ -27,13 +27,11 @@ export default function Login() {
     });
 
   useEffect(() => {
-    if (user != '' || !user || user != null){
+    if (user !== '' || !user || user !== null){
       let path = "/";
       navigate(path);
-    }else{
-      console.log("user is not connected")
     }
-  },[])
+  },[navigate, user])
 
 
 

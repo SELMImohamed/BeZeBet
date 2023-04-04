@@ -23,8 +23,8 @@ class betSchema(BaseModel):
 
 class betParams(BaseModel):
     user_id: int
-    odds_for: int = None
-    odds_against: int = None
+    # odds_for: int = None
+    # odds_against: int = None
     text: str = None
-    result: Optional[bool] = None
+    # result: Optional[bool] = None
     end: Optional[datetime] = None

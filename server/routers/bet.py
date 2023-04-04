@@ -15,13 +15,12 @@ app = FastAPI()
 
 @router.post("/createBet", response_model=betSchema)
 def bet(request: betParams, db: Session = Depends(get_db)):
-    if request.user_id == "" or request.odds_for == "" or request.odds_against == "" or request.result == "":
+    if request.user_id == "" or request.end == "" or request.text == "":
         raise HTTPException(status_code=500, detail=f'EMPTY !')
-    new_bet = create_bet(db, request.user_id, request.odds_for,
-                         request.odds_against, request.result, request.end)
+    new_bet = create_bet(db, request.user_id, request.end)
 
     if new_bet is None:
-        raise HTTPException(status_code=500, detail=f'NOT OK !')
+        raise HTTPException(status_code=500, detail=f'Not created!')
     new_bet_dict = new_bet.__dict__
     new_bet_dict.pop('_sa_instance_state', None)
 

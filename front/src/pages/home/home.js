@@ -3,7 +3,6 @@ import "../../styles/Home.css";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Coins from "../home/—Pngtree—gold coin map_4006641.png";
-import Popup from "reactjs-popup";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -13,21 +12,17 @@ export const HomePage = () => {
   const user = useSelector((state) => state.auth);
 
   useEffect(() => {
-
-    // if (user) {
-    //   <Popup trigger={<button> Trigger</button>} position="right center">
-    //     <div>Popup content here !!</div>
-    //   </Popup>;
-    // } else {
-    //   let path = "/login";
-    //   navigate(path);
-    // }
   }, []);
   let navigate = useNavigate();
 
   const betPage = () => {
-    let path = "/bet";
-    navigate(path);
+    if (user !== '' || !user || user !== null){
+      let path = "/game";
+      navigate(path);
+    }else{
+      let path = "/login";
+      navigate(path);
+    }
   };
 
   return (

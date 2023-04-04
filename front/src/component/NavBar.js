@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { makeStyles } from '@mui/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -11,28 +10,10 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
-// const useStyles = makeStyles(() => ({
-//   appBar: {
-//     backgroundColor: 'black',
-//     '& header': {
-//         backgroundColor: 'black',
-//       },
-//   },
-//   menuButton: {
-//     marginRight: '16px',
-//   },
-//   title: {
-//     flexGrow: 1,
-//   },
-//   drawer: {
-//     width: '240px',
-//   },
-// }));
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const user = useSelector((state) => state.auth);
-//   const classes = useStyles();
 
   const toggleDrawer = (open) => () => {
     setIsDrawerOpen(open);
