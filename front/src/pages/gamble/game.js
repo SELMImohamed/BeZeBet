@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { getAllBet } from "../../services/bet";
 
 import NavBar from "../../component/NavBar";
 const Game = () => {
-    
-    useEffect(() => {
-        console.log("Game mounted");
-        return () => {
-            console.log("Game unmounted");
-        };
-    }, []);
+  const [allBet, setAllBet] = useState({});
+
+  useEffect(() => {
+    const fetchAllBet = async () => {
+      await getAllBet().then((response) => {
+        setAllBet(response.data);
+      });
+    };
+    fetchAllBet();
+    console.log(allBet);
+  }, []);
 
   return (
     <>
-        <NavBar />
+      <NavBar />
       <div className="game">
-        <h1>Game</h1>
+      {Array.isArray(allBet) && allBet.length > 0 ? (
+        allBet.map((bet) => <Bet key={bet._id} bet={bet} />)
+      ) : (
+        <p>No bets found.</p>
+      )}
       </div>
     </>
   );

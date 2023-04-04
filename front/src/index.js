@@ -9,7 +9,6 @@ import { Provider } from "react-redux";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
-import Home from "./routes/Home";
 import Register from "./pages/register/register";
 import Login from './pages/login/login';
 import Game from "./pages/gamble/game";
@@ -23,7 +22,7 @@ import Tutoriel from "./pages/tutoriel/Tutoriel";
 const router = createBrowserRouter(
   [{
     path:"/",
-    element: <Home />,
+    element: <HomePage />,
 
   },
   {
@@ -42,6 +41,10 @@ const router = createBrowserRouter(
     path:"/bet",
     element: <CreateBet />,
   },
+  // {
+  //   path:"/home",
+  //   element: <HomePage />,
+  // }
   {
     path:"/home",
     element: <HomePage />,

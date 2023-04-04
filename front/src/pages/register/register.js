@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
-import "../../styles/Auth.css";
 import React, { useState, useEffect } from "react";
-import NavBar from "../../component/NavBar";
+import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Logo from "../../ressources/img/BeZebet.png";
 import TextField from "@mui/material/TextField";
@@ -10,13 +9,17 @@ import { useNavigate } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material"
+import NavBar from "../../component/NavBar";
 
 import { register } from "../../services/register";
+import "../../styles/Auth.css";
+
 
 export default function Register() {
+  const user = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     name: "",
@@ -24,6 +27,13 @@ export default function Register() {
     password: "",
     password_cfg: "",
   });
+
+  useEffect(() => {
+    if (user !== '' || !user || user !== null) {
+      let path = "/";
+      navigate(path);
+    }
+  }, [navigate, user]);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -47,13 +57,9 @@ export default function Register() {
     }
     const user = register(form);
     if(user){
-      HomePage();
+      let path = "/";
+      navigate(path);
     };
-  };
-
-  const HomePage = () => {
-    let path = "/home";
-    navigate(path);
   };
 
   return (
