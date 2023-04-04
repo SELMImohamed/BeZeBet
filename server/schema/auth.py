@@ -22,9 +22,13 @@ class RegisterParams (BaseModel):
     password: str
     password_cfg: str
 
+
 class RegisterSchema (BaseModel):
     user: User
 
+class LoginParams(BaseModel):
+    email: EmailStr
+    password: str
     
 class LoginSchema (BaseModel):
     user: User
