@@ -27,3 +27,4 @@ def bet(request: betParams, db: Session = Depends(get_db)):
     return {
         "bet": new_bet_dict,
     }
+

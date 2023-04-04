@@ -33,3 +33,6 @@ class UserLog(BaseModel):
     email: str
     password: str
 
+class UserCoins(BaseModel):
+    coins: float
+
