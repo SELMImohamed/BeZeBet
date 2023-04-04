@@ -17,7 +17,7 @@ import "../../styles/Auth.css";
 
 
 export default function Register() {
-  const user = useSelector((state) => state.auth);
+  const auth = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -29,11 +29,12 @@ export default function Register() {
   });
 
   useEffect(() => {
-    if (user !== '' || !user || user !== null) {
+    console.log(auth.user)
+    if (auth.user !== null) {
       let path = "/";
       navigate(path);
     }
-  }, [navigate, user]);
+  }, [navigate, auth]);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);

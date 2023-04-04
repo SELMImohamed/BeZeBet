@@ -41,8 +41,7 @@ const Navbar = () => {
       anchor="left"
       open={isDrawerOpen}
       onClose={toggleDrawer(false)}
-    //   className={classes.drawer}
-    >
+s    >
       {renderNavLinks()}
     </Drawer>
   );

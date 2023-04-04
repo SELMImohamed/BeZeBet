@@ -3,20 +3,23 @@ import "../../styles/Home.css";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Coins from "../home/—Pngtree—gold coin map_4006641.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import NavBar from "../../component/NavBar";
+
 export const HomePage = () => {
-  const user = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-  }, []);
+    console.log(auth.user)
+  }, [dispatch]);
   let navigate = useNavigate();
 
   const betPage = () => {
-    if (user !== '' || !user || user !== null){
+    if (auth.user !== '' || !auth.user || auth.user !== null){
       let path = "/game";
       navigate(path);
     }else{
