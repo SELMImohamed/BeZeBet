@@ -33,6 +33,12 @@ const Navbar = () => {
       <ListItem  component={Link} to="/bet">
         <ListItemText primary="Bet" />
       </ListItem>
+      <ListItem  component={Link} to="/classement">
+        <ListItemText primary="Classement" />
+      </ListItem>
+      <ListItem  component={Link} to="/profil">
+        <ListItemText primary="Profil" />
+      </ListItem>
     </List>
   );
 
