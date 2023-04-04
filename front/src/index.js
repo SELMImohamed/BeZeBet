@@ -14,7 +14,7 @@ import Register from "./pages/register/register";
 import Login from './pages/login/login';
 import Game from "./pages/gamble/game";
 import CreateBet from "./pages/bet/CreateBet";
-import { HomePage } from "./pages/home/Home";
+import { HomePage } from "./pages/home/home";
 
 
 const router = createBrowserRouter(

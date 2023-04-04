@@ -1,6 +1,6 @@
 import React from 'react'
 import TextField from '@mui/material/TextField';
-import {Button} from '@mui/material';
+// import {Button} from '@mui/material';
 import {Box} from '@mui/system';
 import NavBar from '../../component/NavBar'
 import '../../styles/CreateBet.css'
@@ -9,7 +9,7 @@ export default function CreateBet() {
     return (
         <Box>
             <NavBar/>
-            <h2>CREATE YOU'R <span>BET</span></h2>
+            <h2>CREATE YOUR <span>BET</span></h2>
 
             <Box
                 className="textfield_container"
