@@ -69,6 +69,12 @@ const Navbar = () => {
       }}>
         <ListItemText primary="Every Bet" />
       </ListItem>
+      <ListItem  component={Link} to="/classement">
+        <ListItemText primary="Classement" />
+      </ListItem>
+      <ListItem  component={Link} to="/profil">
+        <ListItemText primary="Profil" />
+      </ListItem>
     </List>
   );
 
