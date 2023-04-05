@@ -45,7 +45,7 @@ export const HomePage = () => {
           },
         }}
       >
-        Bienvenue sur Be Ze<span style={{ color: "#FBCF0A" }}>Bet</span>
+        <span style={{color: "white"}}>Bienvenue sur Be Ze</span><span style={{ color: "#FBCF0A" }}>Bet</span>
       </Typography>
       <Box
         sx={{
