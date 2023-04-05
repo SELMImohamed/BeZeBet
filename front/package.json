@@ -29,8 +29,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start-electron": "export ELECTRON_START_URL=http://localhost:3004 && electron .",
-    "start": "export BROWSER=None && react-scripts start",
+    "start-electron": "set ELECTRON_START_URL=http://localhost:3004 && electron . || export ELECTRON_START_URL=http://localhost:3004 && electron .",
+    "start": "SET BROWSER=None && react-scripts start || export BROWSER=None && react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
