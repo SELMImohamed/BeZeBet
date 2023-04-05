@@ -14,16 +14,16 @@ export const HomePage = () => {
   const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    console.log(auth.user)
+    console.log(auth.user);
   }, [dispatch]);
   let navigate = useNavigate();
 
   const betPage = () => {
-    if (auth.user !== '' || !auth.user || auth.user !== null){
-      let path = "/game";
+    if (auth.user !== null) {
+      let path = "/bet";
       navigate(path);
-    }else{
-      let path = "/login";
+    } else {
+      let path = "/register";
       navigate(path);
     }
   };
@@ -39,12 +39,10 @@ export const HomePage = () => {
           display: "flex",
           justifyContent: "center",
           marginTop: 2,
-        '@media (max-width: 960px)':
-          {
+          "@media (max-width: 960px)": {
             fontSize: "2rem",
-            marginBottom: 2
-          }
-
+            marginBottom: 2,
+          },
         }}
       >
         Bienvenue sur Be Ze<span style={{ color: "#FBCF0A" }}>Bet</span>
@@ -65,10 +63,10 @@ export const HomePage = () => {
             justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
-            '@media (max-width: 960px)': {
+            "@media (max-width: 960px)": {
               flexDirection: "column",
-              justifyContent: 'center'
-              },
+              justifyContent: "center",
+            },
           }}
         >
           <Box
@@ -78,9 +76,9 @@ export const HomePage = () => {
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
-              '@media (max-width: 960px)': {
+              "@media (max-width: 960px)": {
                 flexDirection: "column",
-                },
+              },
             }}
           >
             <Typography
@@ -92,9 +90,13 @@ export const HomePage = () => {
                 fontWeight: 800,
                 color: "#fff",
                 marginLeft: 2,
-                '@media (max-width: 960px)': {
+                
+                "@media (max-width: 960px)": {
                   fontSize: "2rem",
-                  },
+                },
+                "@media (max-width: 1600px)": {
+                  fontSize: "2.5rem",
+                },
               }}
             >
               Tu veux créer ton propre{" "}
@@ -112,21 +114,41 @@ export const HomePage = () => {
               Lance maintenant ton propre{" "}
               <span style={{ color: "#FBCF0A" }}>Pari</span> !<br />
             </Typography>
-            <Button
-              className="button"
-              onClick={betPage}
-              sx={{
-                borderRadius: 2,
-                marginTop: 2,
-                p: 1,
-                minWidth: 100,
-                color: "#FBCF0A",
-              }}
-              color="inherit"
-              variant="outlined"
-            >
-              C'est parti mon kiki !!
-            </Button>
+            {auth.user == null ? (
+              <Button
+                className="button"
+                onClick={betPage}
+                sx={{
+                  borderRadius: 2,
+                  marginTop: 2,
+                  p: 1,
+                  minWidth: 300,
+                  minHeight: 90,
+                  color: "#FBCF0A",
+                }}
+                color="inherit"
+                variant="outlined"
+              >
+                Inscrivez-Vous
+              </Button>
+            ) : (
+              <Button
+                className="button"
+                onClick={betPage}
+                sx={{
+                  borderRadius: 2,
+                  marginTop: 2,
+                  p: 1,
+                  minWidth: 300,
+                  minHeight: 90,
+                  color: "#FBCF0A",
+                }}
+                color="inherit"
+                variant="outlined"
+              >
+                C'est parti mon kiki !!
+              </Button>
+            )}
           </Box>
           <Box
             sx={{

@@ -6,15 +6,16 @@ import Logo from "../../ressources/img/BeZebet.png";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 
-import { Visibility, VisibilityOff } from "@mui/icons-material"
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import NavBar from "../../component/NavBar";
 
 import { register } from "../../services/register";
 import "../../styles/Auth.css";
-
 
 export default function Register() {
   const auth = useSelector((state) => state.auth);
@@ -29,7 +30,7 @@ export default function Register() {
   });
 
   useEffect(() => {
-    console.log(auth.user)
+    console.log(auth.user);
     if (auth.user !== null) {
       let path = "/";
       navigate(path);
@@ -57,11 +58,14 @@ export default function Register() {
       return;
     }
     const user = register(form);
-    if(user){
-      let path = "/";
-      navigate(path);
-    };
+    if (user) {
+      goToLogin();
+    }
   };
+  const goToLogin = () =>{
+    let path = "/login";
+    navigate(path);
+  }
 
   return (
     <>
@@ -207,6 +211,33 @@ export default function Register() {
           >
             Register
           </Button>
+          <Typography
+            sx={{
+              marginTop: 2,
+              color: "#FFFFFF",
+              "& a": {
+                color: "inherit",
+              },
+            }}
+
+          >
+            <Link
+              to="/login"
+              sx={{
+                textDecoration: "none",
+              }}
+            >
+              Vous avez déjà un compte ?{" "}
+              <span
+                sx={{
+                  borderBottom: "1px solid #FFFFFF",
+                  display: "inline-block",
+                }}
+              >
+                Connectez-vous
+              </span>
+            </Link>
+          </Typography>
         </Box>
       </form>
     </>

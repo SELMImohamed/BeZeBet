@@ -31,11 +31,11 @@ const router = createBrowserRouter(
     element: <Login />,
   },
   {
-    path:"/game",
+    path:"/bet",
     element: <Game />,
   },
   {
-    path:"/bet",
+    path:"/bet/createBet",
     element: <CreateBet />,
   },
   // {
