@@ -17,6 +17,7 @@ import { HomePage } from "./pages/home/home";
 import Profil from "./pages/profil/Profil";
 import Classement from "./pages/classement/Classement";
 import Tutoriel from "./pages/tutoriel/Tutoriel";
+import ModifyProfil from "./pages/profil/ModifyProfil";
 
 
 const router = createBrowserRouter(
@@ -41,14 +42,6 @@ const router = createBrowserRouter(
     path:"/bet",
     element: <CreateBet />,
   },
-  // {
-  //   path:"/home",
-  //   element: <HomePage />,
-  // }
-  {
-    path:"/home",
-    element: <HomePage />,
-  },
   {
     path:"/profil",
     element: <Profil />,
@@ -60,6 +53,10 @@ const router = createBrowserRouter(
   {
     path:"/tuto",
     element: <Tutoriel />,
+  },
+  {
+    path:"/modifyAccount",
+    element: <ModifyProfil />,
   }
 ]
 );
