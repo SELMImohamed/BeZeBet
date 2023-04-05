@@ -6,24 +6,38 @@ import Coins from "../home/—Pngtree—gold coin map_4006641.png";
 import { useSelector, useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useWeb3React } from '@web3-react/core';
+import { Contract } from '@ethersproject/contracts';
+import { InjectedConnector } from '@web3-react/injected-connector';
+
 
 import NavBar from "../../component/NavBar";
 
 export const HomePage = () => {
+  const { account, library, activate } = useWeb3React();
+  async function handleSubmit() {
+    const signer = library.getSigner();
+    const myContract = new Contract(
+      '0x123abc...',
+      
+      signer
+    );
+    await myContract.doSomething();
+  }
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    console.log(auth.user)
+    console.log(auth.user);
   }, [dispatch]);
   let navigate = useNavigate();
 
   const betPage = () => {
-    if (auth.user !== '' || !auth.user || auth.user !== null){
-      let path = "/game";
+    if (auth.user !== null) {
+      let path = "/bet";
       navigate(path);
-    }else{
-      let path = "/login";
+    } else {
+      let path = "/register";
       navigate(path);
     }
   };
@@ -39,15 +53,13 @@ export const HomePage = () => {
           display: "flex",
           justifyContent: "center",
           marginTop: 2,
-        '@media (max-width: 960px)':
-          {
+          "@media (max-width: 960px)": {
             fontSize: "2rem",
-            marginBottom: 2
-          }
-
+            marginBottom: 2,
+          },
         }}
       >
-        Bienvenue sur Be Ze<span style={{ color: "#FBCF0A" }}>Bet</span>
+        <span style={{color: "white"}}>Bienvenue sur Be Ze</span><span style={{ color: "#FBCF0A" }}>Bet</span>
       </Typography>
       <Box
         sx={{
@@ -65,10 +77,10 @@ export const HomePage = () => {
             justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
-            '@media (max-width: 960px)': {
+            "@media (max-width: 960px)": {
               flexDirection: "column",
-              justifyContent: 'center'
-              },
+              justifyContent: "center",
+            },
           }}
         >
           <Box
@@ -78,9 +90,9 @@ export const HomePage = () => {
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
-              '@media (max-width: 960px)': {
+              "@media (max-width: 960px)": {
                 flexDirection: "column",
-                },
+              },
             }}
           >
             <Typography
@@ -92,9 +104,13 @@ export const HomePage = () => {
                 fontWeight: 800,
                 color: "#fff",
                 marginLeft: 2,
-                '@media (max-width: 960px)': {
+                
+                "@media (max-width: 960px)": {
                   fontSize: "2rem",
-                  },
+                },
+                "@media (max-width: 1600px)": {
+                  fontSize: "2.5rem",
+                },
               }}
             >
               Tu veux créer ton propre{" "}
@@ -112,21 +128,41 @@ export const HomePage = () => {
               Lance maintenant ton propre{" "}
               <span style={{ color: "#FBCF0A" }}>Pari</span> !<br />
             </Typography>
-            <Button
-              className="button"
-              onClick={betPage}
-              sx={{
-                borderRadius: 2,
-                marginTop: 2,
-                p: 1,
-                minWidth: 100,
-                color: "#FBCF0A",
-              }}
-              color="inherit"
-              variant="outlined"
-            >
-              C'est parti mon kiki !!
-            </Button>
+            {auth.user == null ? (
+              <Button
+                className="button"
+                onClick={betPage}
+                sx={{
+                  borderRadius: 2,
+                  marginTop: 2,
+                  p: 1,
+                  minWidth: 300,
+                  minHeight: 90,
+                  color: "#FBCF0A",
+                }}
+                color="inherit"
+                variant="outlined"
+              >
+                Inscrivez-Vous
+              </Button>
+            ) : (
+              <Button
+                className="button"
+                onClick={betPage}
+                sx={{
+                  borderRadius: 2,
+                  marginTop: 2,
+                  p: 1,
+                  minWidth: 300,
+                  minHeight: 90,
+                  color: "#FBCF0A",
+                }}
+                color="inherit"
+                variant="outlined"
+              >
+                C'est parti mon kiki !!
+              </Button>
+            )}
           </Box>
           <Box
             sx={{
@@ -139,6 +175,15 @@ export const HomePage = () => {
             <img src={Coins} alt="logo" className="logo_home" />
           </Box>
         </Box>
+        <div>
+          {account ? (
+            <p>Connected with address: {account}</p>
+          ) : (
+            <button onClick={() => activate(InjectedConnector)}>
+              Connect Metamask
+            </button>
+          )}
+        </div>
       </Box>
     </>
   );

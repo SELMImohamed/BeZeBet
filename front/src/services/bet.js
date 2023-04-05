@@ -2,11 +2,11 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:8000/";
 
-export const bet = async (form) => {
+export const createBet = async (form) => {
   try {
     const res = await axios.post(`${baseUrl}bet/createBet`, form);
     // console.log(res);
-    return res.data;
+    return res;
   } catch (e) {
     console.error(e);
   }

@@ -18,6 +18,7 @@ import Profil from "./pages/profil/Profil";
 import Classement from "./pages/classement/Classement";
 import Tutoriel from "./pages/tutoriel/Tutoriel";
 import ModifyProfil from "./pages/profil/ModifyProfil";
+import MetaMask from "./pages/tuto/tutorial";
 
 
 const router = createBrowserRouter(
@@ -35,11 +36,11 @@ const router = createBrowserRouter(
     element: <Login />,
   },
   {
-    path:"/game",
+    path:"/bet",
     element: <Game />,
   },
   {
-    path:"/bet",
+    path:"/bet/createBet",
     element: <CreateBet />,
   },
   {
@@ -57,6 +58,11 @@ const router = createBrowserRouter(
   {
     path:"/modifyAccount",
     element: <ModifyProfil />,
+  },
+
+  {
+    path:"/wallet",
+    element: <MetaMask />
   }
 ]
 );

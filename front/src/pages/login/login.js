@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
+import Typography from '@mui/material/Typography';
+import { Link } from "react-router-dom";
+
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import "../../styles/Auth.css";
@@ -57,7 +60,6 @@ export default function Login() {
         }
     })
   };
-
   return (
     <>
       <NavBar />
@@ -152,6 +154,32 @@ export default function Login() {
           >
             Login In !
           </Button>
+          <Typography
+            sx={{
+              marginTop: 2,
+              color: "#FFFFFF",
+              "& a": {
+                color: "inherit",
+              },
+            }}
+          >
+            <Link
+              to="/register"
+              sx={{
+                textDecoration: "none",
+              }}
+            >
+              Vous n'avez pas de compte ?{" "}
+              <span
+                sx={{
+                  borderBottom: "1px solid #FFFFFF",
+                  display: "inline-block",
+                }}
+              >
+                Inscrivez-vous
+              </span>
+            </Link>
+          </Typography>
         </Box>
       </form>
     </>
