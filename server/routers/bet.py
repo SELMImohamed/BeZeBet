@@ -43,3 +43,4 @@ def get_bet(id: int, db: Session = Depends(get_db)):
 def get_all_bet(db: Session = Depends(get_db)):
     bet = get_all_bets(db)
     return bet
+
