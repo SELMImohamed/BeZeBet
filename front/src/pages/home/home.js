@@ -6,10 +6,24 @@ import Coins from "../home/—Pngtree—gold coin map_4006641.png";
 import { useSelector, useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useWeb3React } from '@web3-react/core';
+import { Contract } from '@ethersproject/contracts';
+import { InjectedConnector } from '@web3-react/injected-connector';
+
 
 import NavBar from "../../component/NavBar";
 
 export const HomePage = () => {
+  const { account, library, activate } = useWeb3React();
+  async function handleSubmit() {
+    const signer = library.getSigner();
+    const myContract = new Contract(
+      '0x123abc...',
+      
+      signer
+    );
+    await myContract.doSomething();
+  }
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
@@ -161,6 +175,15 @@ export const HomePage = () => {
             <img src={Coins} alt="logo" className="logo_home" />
           </Box>
         </Box>
+        <div>
+          {account ? (
+            <p>Connected with address: {account}</p>
+          ) : (
+            <button onClick={() => activate(InjectedConnector)}>
+              Connect Metamask
+            </button>
+          )}
+        </div>
       </Box>
     </>
   );
