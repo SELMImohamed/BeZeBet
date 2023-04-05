@@ -9,6 +9,7 @@ from models.bet import Bet
 from models.user_bet import User_bet
 from config.database import get_db
 from routers.auth import router as AuthRouter
+from routers.bet import router as BetRouter
 
 router = APIRouter(
     tags=['auth'],
@@ -27,6 +28,8 @@ app.add_middleware(
 )
 
 app.include_router(AuthRouter, tags=["auth"], prefix="/auth")
+app.include_router(BetRouter, tags=["bet"], prefix="/bet")
+
 
 @app.get("/")
 async def root():

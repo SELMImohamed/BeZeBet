@@ -2,10 +2,9 @@ import axios from 'axios';
 
 const baseUrl = 'http://localhost:8000/';
 
-
- export const register = ( form ) =>{
+ export const register = async ( form ) =>{
     try{
-        const res = axios.post(`${baseUrl}/register`, form);
+        const res = await axios.post(`${baseUrl}auth/register`, form);
         console.log(res);
         return res.data;
     }
