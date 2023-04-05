@@ -25,25 +25,48 @@ const Navbar = () => {
   };
 
   const renderNavLinks = () => (
-    <List>
-      <ListItem component={Link} to="/">
+    <List
+      sx={{
+        width: 250,
+        height: "100%",
+        paddingTop: 15,
+        backgroundColor: "black",
+      }}
+    >
+      <ListItem component={Link} to="/"
+        sx={{
+          color: "white",
+        }}
+      >
         <ListItemText primary="Home" />
       </ListItem>
       {auth.user == null ? (
         <>
-          <ListItem component={Link} to="/register">
+          <ListItem component={Link} to="/register"
+          sx={{
+            color: "white",
+          }}>
             <ListItemText primary="Register" />
           </ListItem>
-          <ListItem component={Link} to="/login">
+          <ListItem component={Link} to="/login"
+          sx={{
+            color: "white",
+          }}>
             <ListItemText primary="Login" />
           </ListItem>
         </>
       ) : (
-        <ListItem component={Link} to="/profile">
+        <ListItem component={Link} to="/profile"
+        sx={{
+          color: "white",
+        }}>
           <ListItemText primary="Profile" />
         </ListItem>
       )}
-      <ListItem component={Link} to="/bet">
+      <ListItem component={Link} to="/bet"
+      sx={{
+        color: "white",
+      }}>
         <ListItemText primary="Every Bet" />
       </ListItem>
     </List>
@@ -67,6 +90,7 @@ const Navbar = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          color : "white"
         }}
       >
         <IconButton
@@ -121,7 +145,8 @@ const Navbar = () => {
               marginLeft: "auto",
             }}
           >
-            Vous êtes connecté
+            Vous êtes connecté <br/>
+            Bienvenue {auth.user.name}
           </div>
         ) : (
           <div
